@@ -72,6 +72,8 @@ export default function IntroAnimation({ forceShow = false, onComplete }: IntroA
       timers.push(
         setTimeout(() => {
           setStage(4);
+          // open the home page as the backdrop starts dissolving (no dead gap)
+          if (onCompleteRef.current) onCompleteRef.current();
         }, 1950)
       );
 
@@ -79,7 +81,6 @@ export default function IntroAnimation({ forceShow = false, onComplete }: IntroA
       timers.push(
         setTimeout(() => {
           setShouldRender(false);
-          if (onCompleteRef.current) onCompleteRef.current();
         }, 2350)
       );
     }

@@ -171,6 +171,8 @@
   display: flex;
   flex-direction: column;
   padding-left: clamp(0px, 2.5vw, 40px);
+  /* line the title up with .mainTitle (offset by the "Get in touch" tag) */
+  padding-top: 33px;
 }
 
 .infoTitle {

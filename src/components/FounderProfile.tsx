@@ -3,9 +3,12 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Outfit } from 'next/font/google';
 import { Home } from 'lucide-react';
 import Navbar from './Navbar';
 import Footer from './Footer';
+
+const bioFont = Outfit({ subsets: ['latin'], weight: ['300', '400', '500', '600'] });
 
 // ── FOUNDER CONTENT (All data in one editable constant) ──
 export const FOUNDER = {
@@ -233,7 +236,7 @@ export default function FounderProfile() {
                 fontSize: 'clamp(1rem, 1.2vw, 1.4rem)',
                 fontWeight: 600,
                 color: '#9e1b23',
-                marginTop: '1.2vw',
+                marginTop: 'clamp(10px, 1vw, 18px)',
                 marginBottom: 0,
                 lineHeight: 1.3,
                 letterSpacing: '0.08em',
@@ -247,23 +250,24 @@ export default function FounderProfile() {
             {/* 3. Bio Paragraphs */}
             <div
               style={{
-                marginTop: '2.5vw',
+                marginTop: 'clamp(24px, 2.2vw, 40px)',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '22px',
+                gap: 'clamp(18px, 1.5vw, 26px)',
+                maxWidth: '62rem',
               }}
-              className="founder-bio-container"
+              className={`founder-bio-container ${bioFont.className}`}
             >
               {FOUNDER.bio.map((paragraph, index) => (
                 <p
                   key={index}
                   style={{
-                    fontSize: 'clamp(1.05rem, 1.2vw, 1.35rem)',
+                    fontSize: 'clamp(1.1rem, 1.3vw, 1.45rem)',
                     fontWeight: 400,
-                    lineHeight: 1.75,
-                    color: '#2d3342',
+                    lineHeight: 1.7,
+                    color: '#333a48',
                     margin: 0,
-                    letterSpacing: '0.005em',
+                    letterSpacing: '0.01em',
                   }}
                   className="founder-bio-paragraph"
                 >
@@ -301,7 +305,7 @@ export default function FounderProfile() {
         .founder-left-col {
           display: flex;
           flex-direction: column;
-          margin-top: 5.2vw;
+          margin-top: 0;
           width: 100%;
         }
 

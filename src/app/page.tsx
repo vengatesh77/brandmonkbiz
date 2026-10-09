@@ -46,11 +46,25 @@ export default function HomePage() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: introFinished ? 1 : 0 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0 }}
         className="w-full"
       >
         <ScrollStage
-          hero={<Hero onReplayIntro={handleReplayIntro} />}
+          hero={
+            /* Home opens with a "boom" — expands from the centre once the intro ends */
+            <motion.div
+              initial={{ clipPath: 'circle(0% at 50% 50%)', scale: 1.18 }}
+              animate={
+                introFinished
+                  ? { clipPath: 'circle(80% at 50% 50%)', scale: 1 }
+                  : { clipPath: 'circle(0% at 50% 50%)', scale: 1.18 }
+              }
+              transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+              style={{ width: '100%', height: '100svh' }}
+            >
+              <Hero onReplayIntro={handleReplayIntro} />
+            </motion.div>
+          }
         >
           {/* Founder slides up over the pinned Hero like a curtain */}
           <Founder />

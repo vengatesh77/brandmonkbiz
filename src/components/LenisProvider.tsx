@@ -14,6 +14,8 @@ export default function LenisProvider({
 
     const lenis = new Lenis({
       duration: 1.1,
+      // smooth-scroll to #hash targets (navbar links)
+      anchors: true,
       // ease-out expo curve
       easing: (t: number) => 1 - Math.pow(1 - t, 5),
     } as ConstructorParameters<typeof Lenis>[0]);

@@ -37,7 +37,7 @@ export default function Footer({ onReplayIntro }: FooterProps) {
       
       {/* Top Corporate Connect Strip */}
       <div style={{ backgroundColor: '#0e111a', borderBottom: '1px solid rgba(255, 255, 255, 0.06)', padding: '36px 0' }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '24px' }}>
+        <div className="container" style={{ maxWidth: '1920px', padding: '0 5.5vw', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '24px' }}>
           <div>
             <div style={{ color: '#ffffff', fontSize: '1.2rem', fontWeight: 700, marginBottom: '4px' }}>
               Subscribe to Brand Monk Group Global Insights
@@ -92,7 +92,7 @@ export default function Footer({ onReplayIntro }: FooterProps) {
       </div>
 
       {/* Main Footer Links Columns */}
-      <div className="container" style={{ padding: '80px 24px 60px 24px' }}>
+      <div className="container" style={{ maxWidth: '1920px', padding: '80px 5.5vw 60px' }}>
         <div
           style={{
             display: 'grid',

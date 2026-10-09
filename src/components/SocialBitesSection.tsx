@@ -68,7 +68,7 @@ export default function SocialBitesSection() {
       <div style={{ position: 'absolute', top: '10%', right: '5%', width: '450px', height: '450px', backgroundColor: 'rgba(201,165,77,0.06)', borderRadius: '50%', filter: 'blur(120px)', pointerEvents: 'none' }} />
       <div style={{ position: 'absolute', bottom: '10%', left: '5%', width: '500px', height: '500px', backgroundColor: 'rgba(158,27,35,0.04)', borderRadius: '50%', filter: 'blur(140px)', pointerEvents: 'none' }} />
 
-      <div className="container" style={{ position: 'relative', zIndex: 10 }}>
+      <div style={{ position: 'relative', zIndex: 10, width: '100%', maxWidth: 'calc(1760px + 2 * clamp(20px, 5vw, 80px))', margin: '0 auto', padding: '0 clamp(20px, 5vw, 80px)' }}>
 
         {/* ── Section Header ── */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '48px', flexWrap: 'wrap', gap: '24px' }}>

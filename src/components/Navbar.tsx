@@ -18,11 +18,12 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
   // Solid white state on all non-home pages (e.g., /founder)
   const isSolidWhite = pathname !== '/';
 
+  const base = isSolidWhite ? '/' : '';
   const navLinks = [
-    { label: 'OUR STORY', href: isSolidWhite ? '/#story' : '#story', id: 'story' },
-    { label: 'BUSINESSES', href: isSolidWhite ? '/#businesses' : '#businesses', id: 'businesses' },
-    { label: 'MEDIA', href: isSolidWhite ? '/#media' : '#media', id: 'media' },
-    { label: 'CONTACT', href: isSolidWhite ? '/#contact' : '#contact', id: 'contact' },
+    { label: 'OUR STORY', href: `${base}#our-story`, id: 'story' },
+    { label: 'BUSINESSES', href: `${base}#companies`, id: 'businesses' },
+    { label: 'MEDIA', href: `${base}#social-bites`, id: 'media' },
+    { label: 'CONTACT', href: `${base}#contact`, id: 'contact' },
   ];
 
   return (
@@ -47,7 +48,10 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
             : 'absolute top-0 left-0 pointer-events-none'
         }`}
       >
-        <div className="w-full max-w-[1760px] mx-auto relative px-[5vw] lg:px-[6vw] xl:px-[7vw] flex items-center justify-between">
+        <div
+          className={`w-full max-w-[1760px] mx-auto ${isSolidWhite ? 'relative' : ''} px-[5vw] lg:px-[6vw] xl:px-[7vw] flex items-center justify-between`}
+          style={isSolidWhite ? { maxWidth: '1920px', paddingLeft: '5.5vw', paddingRight: '5.5vw' } : undefined}
+        >
           {/* Left: Brand Logo */}
           <Link
             href="/"
@@ -88,10 +92,14 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
 
           {/* Right Side: Navigation Links with generous right clearance */}
           <div
-            className="pointer-events-auto hidden lg:flex items-center gap-[2.5vw] mr-[clamp(24px,3.5vw,70px)]"
-            style={{
-              marginTop: isSolidWhite ? '0' : 'clamp(35px, 3.2vw, 55px)',
-            }}
+            className={`pointer-events-auto hidden lg:flex items-center gap-[2.5vw] ${
+              isSolidWhite ? '' : 'absolute left-1/2 -translate-x-1/2 -translate-y-1/2'
+            }`}
+            style={
+              isSolidWhite
+                ? { marginTop: '0' }
+                : { top: 'calc(clamp(85px, 5.9vw, 115px) / 2)' }
+            }
           >
             {/* Nav Links */}
             <nav className="flex items-center gap-[2.5vw]">

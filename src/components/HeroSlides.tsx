@@ -5,10 +5,10 @@ import { motion, useReducedMotion } from "framer-motion";
 
 /* ── Unchanged constants ───────────────────────────────────────────── */
 const SLIDES = [
-  { word: "CONSULTING",              image: "/hero/consulting.jpg" },
-  { word: "ARTIFICIAL INTELLIGENCE", image: "/hero/ai.jpg" },
-  { word: "FOOD & BEVERAGES",        image: "/hero/food-beverages.jpg" },
-  { word: "EDUCATION",               image: "/hero/education.jpg" },
+  { word: "CONSULTING",              image: "/hero/consulting-bg.jpg" },
+  { word: "ARTIFICIAL INTELLIGENCE", image: "/hero/ai-bg.jpg" },
+  { word: "FOOD & BEVERAGES",        image: "/hero/food-beverages-bg.jpg" },
+  { word: "EDUCATION",               image: "/hero/education-bg.jpg" },
 ];
 const INTERVAL_MS = 4000;
 const FADE        = 1.2;                               // image crossfade (s)

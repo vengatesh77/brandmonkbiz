@@ -1,7 +1,7 @@
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Outfit } from "next/font/google";
 import Link from "next/link";
 
-const font = Plus_Jakarta_Sans({
+const font = Outfit({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
 });
@@ -46,7 +46,7 @@ export default function FounderQuote({
           <strong style={B}>enterprises</strong> that will define the next decade of global business.
           Excellence is not our standard — it is our <strong style={B}>baseline</strong>.
           {/* closing quote mark, raised, small gap after the period */}
-          <span aria-hidden style={{ ...mark, marginLeft: u(0.25), verticalAlign: "top" }}>”</span>
+          <span aria-hidden style={{ ...mark, marginLeft: u(0.08), verticalAlign: "top" }}>”</span>
         </p>
 
         {/* bottom line, from the left edge up to the tail */}
