@@ -72,8 +72,8 @@ export const COMPANIES: Company[] = [
     location: "Hyderabad, India",
     description:
       "Restaurant Consulting delivers end-to-end operational blueprints for food brands, cafés, and cloud kitchens. From kitchen workflows to menu engineering, we install the exact systems needed to run a profitable food business.",
-    image: "/images/image.png",
-    websiteUrl: "https://brandmonk.biz/restaurant-consulting",
+    image: "/images/image copy 6.png",
+    websiteUrl: "https://restaurantconsulting.in/",
     highlights: ["Culinary R&D", "Franchise Architecture", "Yield Mgmt"],
   },
   {
@@ -95,7 +95,7 @@ export const COMPANIES: Company[] = [
     description:
       "Digital Learners Hub democratizes high-income skills by providing expert-led digital training in regional languages. We equip ambitious individuals with actionable knowledge across technical, creative, and commercial fields to create new revenue streams.",
     image: "/images/Digital Learners Hub Workspace.png",
-    websiteUrl: "https://digitallearnershub.com",
+    websiteUrl: "https://www.digitallearnershub.com/",
     highlights: ["Executive Certifications", "Adaptive Learning", "Global Access"],
   },
 ];

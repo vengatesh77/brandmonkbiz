@@ -1,12 +1,13 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Outfit } from 'next/font/google';
 import { Home } from 'lucide-react';
 import Navbar from './Navbar';
-import Footer from './Footer';
+import ContactSection from './ContactSection';
+import { useFounderIntro } from '@/hooks/useFounderIntro';
 
 const bioFont = Outfit({ subsets: ['latin'], weight: ['300', '400', '500', '600'] });
 
@@ -27,6 +28,9 @@ export const FOUNDER = {
 };
 
 export default function FounderProfile() {
+  const rootRef = useRef<HTMLElement>(null);
+  useFounderIntro(rootRef);
+
   return (
     <div
       style={{
@@ -43,6 +47,7 @@ export default function FounderProfile() {
 
       {/* ── MAIN CONTENT WRAPPER (1920px max, 5.5vw padding) ── */}
       <main
+        ref={rootRef}
         style={{
           width: '100%',
           maxWidth: '1920px',
@@ -52,11 +57,13 @@ export default function FounderProfile() {
           paddingTop: '80px',
           paddingBottom: '100px',
           flex: '1 0 auto',
+          visibility: 'hidden',
         }}
         className="founder-main-container"
       >
         {/* ── BREADCRUMB (Cleanly 65px below the 80px fixed navbar) ── */}
         <nav
+          data-fi="crumb"
           aria-label="Breadcrumb"
           style={{
             paddingTop: '65px',
@@ -126,8 +133,13 @@ export default function FounderProfile() {
           ═══════════════════════════════════════════════════ */}
           <div className="founder-left-col">
             {/* PHOTO: Uncropped natural aspect ratio, full column width */}
-            <div className="founder-photo-box">
+            <div
+              data-fi="photo"
+              className="founder-photo-box"
+              style={{ overflow: 'hidden', willChange: 'transform', transformOrigin: 'center' }}
+            >
               <Image
+                data-fi="photo-img"
                 src={FOUNDER.photo}
                 alt={FOUNDER.name}
                 width={720}
@@ -150,6 +162,7 @@ export default function FounderProfile() {
               {/* Official LinkedIn Logo */}
               {FOUNDER.linkedin && (
                 <a
+                  data-fi="social"
                   href={FOUNDER.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -170,6 +183,7 @@ export default function FounderProfile() {
               {/* Official Instagram Logo */}
               {FOUNDER.instagram && (
                 <a
+                  data-fi="social"
                   href={FOUNDER.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -190,6 +204,7 @@ export default function FounderProfile() {
               {/* X / Twitter (rendered only if x string is not empty) */}
               {FOUNDER.x && (
                 <a
+                  data-fi="social"
                   href={FOUNDER.x}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -215,6 +230,8 @@ export default function FounderProfile() {
           <div className="founder-right-col">
             {/* 1. Name */}
             <h1
+              data-fi="name"
+              aria-label={FOUNDER.name}
               style={{
                 fontSize: 'clamp(2.2rem, 3.2vw, 3.8rem)',
                 fontWeight: 700,
@@ -225,13 +242,23 @@ export default function FounderProfile() {
                 letterSpacing: '-0.02em',
                 fontFamily: 'var(--font-montserrat), sans-serif',
               }}
-              className="founder-name-heading"
+              className="founder-name-heading inline-block w-fit whitespace-nowrap will-change-transform"
             >
-              {FOUNDER.name}
+              {FOUNDER.name.split(" ").map((w, wi, arr) => (
+                <span key={wi} aria-hidden className="inline-block whitespace-nowrap">
+                  {w.split("").map((ch, i) => (
+                    <span key={i} className="inline-block overflow-hidden align-bottom pb-[0.1em] -mb-[0.1em]">
+                      <span data-fi="char" className="inline-block">{ch}</span>
+                    </span>
+                  ))}
+                  {wi < arr.length - 1 && <span className="inline-block w-[0.3em]" />}
+                </span>
+              ))}
             </h1>
 
             {/* 2. Role */}
             <h2
+              data-fi="role"
               style={{
                 fontSize: 'clamp(1rem, 1.2vw, 1.4rem)',
                 fontWeight: 600,
@@ -261,6 +288,7 @@ export default function FounderProfile() {
               {FOUNDER.bio.map((paragraph, index) => (
                 <p
                   key={index}
+                  data-fi="bio"
                   style={{
                     fontSize: 'clamp(1.1rem, 1.3vw, 1.45rem)',
                     fontWeight: 400,
@@ -280,8 +308,8 @@ export default function FounderProfile() {
         </div>
       </main>
 
-      {/* ── FOOTER ── */}
-      <Footer />
+      {/* ── CONTACT & FOOTER SECTION ── */}
+      <ContactSection />
 
       {/* ── SCOPED CSS FOR 100% BULLETPROOF RESPONSIVE LAYOUT & HOVER STATES ── */}
       <style>{`
@@ -330,13 +358,7 @@ export default function FounderProfile() {
           border: 1px solid #d1d5db;
           background-color: #ffffff;
           color: #333333;
-          transition: all 0.25s ease;
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
-
-        .social-btn:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         }
 
         .social-btn-linkedin:hover {

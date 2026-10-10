@@ -2,10 +2,10 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight } from 'lucide-react';
-import { BrandMonkIcon } from './BrandMonkIcon';
 
 interface NavbarProps {
   onReplayIntro?: () => void;
@@ -52,43 +52,68 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
           className={`w-full max-w-[1760px] mx-auto ${isSolidWhite ? 'relative' : ''} px-[5vw] lg:px-[6vw] xl:px-[7vw] flex items-center justify-between`}
           style={isSolidWhite ? { maxWidth: '1920px', paddingLeft: '5.5vw', paddingRight: '5.5vw' } : undefined}
         >
-          {/* Left: Brand Logo */}
-          <Link
-            href="/"
-            className={`pointer-events-auto flex items-center justify-center transition-transform duration-300 hover:opacity-95 ${
-              isSolidWhite ? 'gap-3' : 'bg-white shadow-xl flex-col'
-            }`}
-            style={
-              isSolidWhite
-                ? { height: '100%' }
-                : {
-                    width: 'clamp(110px, 7.6vw, 150px)',
-                    height: 'clamp(85px, 5.9vw, 115px)',
-                    padding: '12px 14px',
-                  }
+          {/* ── Logo (absolute, top-left, no background) ── */}
+          <style>{`
+            .bm-logo-card {
+              position: absolute;
+              top: 0;
+              left: clamp(16px, 7.5vw, 144px);
+              z-index: 60;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background: transparent;
+              width: clamp(110px, 9vw, 172px);
+              height: clamp(90px, 7vw, 130px);
+              text-decoration: none;
+              transition: opacity 0.2s ease;
             }
-            aria-label="Brand Monk Group Home"
-          >
-            {isSolidWhite ? (
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 flex items-center justify-center">
-                  <BrandMonkIcon size={34} color="#050608" className="w-full h-full" />
-                </div>
-                <span className="text-[#050608] font-bold text-[12px] sm:text-[14px] tracking-[0.2em] uppercase leading-none">
-                  BRAND MONK
-                </span>
+            .bm-logo-card:hover { opacity: 0.85; }
+            .bm-logo-card img {
+              display: block;
+              height: 90%;
+              width: auto;
+              object-fit: contain;
+              filter: drop-shadow(0 2px 8px rgba(0,0,0,0.45));
+            }
+            @media (max-width: 767px) {
+              .bm-logo-card { width: 90px; height: 80px; left: 16px; }
+              .bm-logo-card img { height: 88%; }
+            }
+          `}</style>
+
+          {isSolidWhite ? (
+            /* Solid-white navbar (inner pages): logo inline, no background */
+            <Link
+              href="/"
+              className="pointer-events-auto flex items-center hover:opacity-90 transition-opacity"
+              style={{ height: '100%' }}
+              aria-label="Brand Monk Group Home"
+            >
+              <div style={{ position: 'relative', width: '160px', height: '64px' }}>
+                <Image
+                  src="/images/1617787737947.png"
+                  alt="Brand Monk Group"
+                  fill
+                  style={{ objectFit: 'contain', objectPosition: 'left center' }}
+                  priority
+                />
               </div>
-            ) : (
-              <div className="w-full h-full flex flex-col items-center justify-center gap-1.5">
-                <div className="w-7 h-7 sm:w-9 sm:h-9 flex items-center justify-center">
-                  <BrandMonkIcon size={40} color="#050608" className="w-full h-full" />
-                </div>
-                <span className="text-[#050608] font-bold text-[9px] sm:text-[11px] tracking-[0.18em] uppercase text-center leading-none">
-                  BRAND MONK
-                </span>
-              </div>
-            )}
-          </Link>
+            </Link>
+          ) : (
+            /* Homepage: logo floats over hero, no card/background */
+            <Link
+              href="/"
+              className="bm-logo-card pointer-events-auto"
+              aria-label="Brand Monk Group Home"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/1617787737947.png"
+                alt="Brand Monk Group"
+              />
+            </Link>
+          )}
 
           {/* Right Side: Navigation Links with generous right clearance */}
           <div

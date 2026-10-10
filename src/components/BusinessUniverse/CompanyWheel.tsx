@@ -3,7 +3,7 @@
 import React, { useMemo, useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Company } from '@/data/companies';
-import { BrandMonkIcon } from '../BrandMonkIcon';
+import Image from 'next/image';
 
 const MAROON = '#9e1b23';
 const MAROON_RGBA = (a: number) => `rgba(158,27,35,${a})`;
@@ -441,44 +441,39 @@ export default function CompanyWheel({
             border: `1px solid ${MAROON_RGBA(0.35)}`,
             boxShadow: `0 0 40px ${MAROON_RGBA(0.08)}, 0 2px 16px rgba(0,0,0,0.08)`,
             display: 'flex',
-            flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: 14,
             zIndex: 20,
             pointerEvents: 'none',
           }}
           className="wheel-centre-hub"
         >
-          {/* Logo 130px */}
+          {/* Brand Monk Official Seal */}
           <div
             style={{
-              width: 130,
-              height: 'auto',
+              position: 'relative',
+              width: 184,
+              height: 184,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
             }}
             className="animate-logo-breathe"
           >
-            <BrandMonkIcon size={54} color={MAROON} className="w-full h-auto" />
+            <Image
+              src="/images/image copy 8.png"
+              alt="Brand Monk Group"
+              width={184}
+              height={184}
+              priority
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+                filter: 'drop-shadow(0 4px 14px rgba(158, 27, 35, 0.15))',
+              }}
+            />
           </div>
-
-          {/* Under logo "BRAND MONK GROUP" */}
-          <span
-            style={{
-              color: MAROON,
-              textTransform: 'uppercase',
-              fontWeight: 600,
-              letterSpacing: '.28em',
-              fontSize: '12px',
-              whiteSpace: 'nowrap',
-              lineHeight: 1,
-              textAlign: 'center',
-            }}
-          >
-            BRAND MONK GROUP
-          </span>
         </div>
 
         {/* ── LABELS: Positioned in stage pixels, moving synchronously with wheel rotation ── */}

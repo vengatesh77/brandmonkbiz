@@ -7,7 +7,7 @@ import { motion, useReducedMotion } from "framer-motion";
 const SLIDES = [
   { word: "CONSULTING",              image: "/hero/consulting-bg.jpg" },
   { word: "ARTIFICIAL INTELLIGENCE", image: "/hero/ai-bg.jpg" },
-  { word: "FOOD & BEVERAGES",        image: "/hero/food-beverages-bg.jpg" },
+  { word: "FOOD & BEVERAGES",        image: "/images/image copy 5.png" },
   { word: "EDUCATION",               image: "/hero/education-bg.jpg" },
 ];
 const INTERVAL_MS = 4000;
