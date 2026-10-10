@@ -92,14 +92,7 @@ export default function FounderSection() {
                 letterSpacing: '-0.01em',
               }}
             >
-              We are not just building a company.{' '}
-              <strong style={{ fontWeight: 700, color: '#0f172a' }}>
-                We are building the engineers, the brands, and the enterprises
-              </strong>{' '}
-              that will define the next decade of global business.{' '}
-              <strong style={{ fontWeight: 700, color: '#9e1b23' }}>
-                Excellence is not our standard — it is our baseline.
-              </strong>
+              We are not just building businesses. We are creating value, challenging mediocrity, and building something that lasts. I’ve never waited for the right path, I’ve always built my way forward. Because some things are worth the struggle, and I’ve always been willing to take it.
             </p>
           </blockquote>
 
