@@ -41,7 +41,8 @@ export default function FounderQuote({
         <span aria-hidden style={{ ...mark, position: "absolute", left: u(-0.76), top: u(0.05) }}>“</span>
 
         <p style={{ margin: 0, paddingRight: u(2.2), lineHeight: 1.38, fontWeight: 400, color: "#333" }}>
-          We are not just building businesses. We are creating value, challenging mediocrity, and building something that lasts. I’ve never waited for the right path, I’ve always built my way forward. Because some things are worth the struggle, and I’ve always been willing to take it.
+          We are not just building businesses. We are creating value, challenging mediocrity, and building something that lasts. I’ve never waited for the right path,{" "}
+          <strong style={B}>I’ve always built my way forward</strong>. Because some things are worth the struggle, and I’ve always been willing to take it.
           {/* closing quote mark, raised, small gap after the period */}
           <span aria-hidden style={{ ...mark, marginLeft: u(0.08), verticalAlign: "top" }}>”</span>
         </p>
