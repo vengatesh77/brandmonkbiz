@@ -1,19 +1,11 @@
 import type { Metadata, Viewport } from 'next';
-import { Montserrat, Inter } from 'next/font/google';
+import { Lexend } from 'next/font/google';
 import './globals.css';
 import LenisProvider from '@/components/LenisProvider';
 
-const montserrat = Montserrat({
+const lexend = Lexend({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800'],
-  variable: '--font-montserrat',
-  display: 'swap',
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '600', '700', '800', '900'],
-  variable: '--font-inter',
+  variable: '--font-lexend',
   display: 'swap',
 });
 
@@ -49,16 +41,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${inter.variable}`}>
+    <html lang="en" className={lexend.variable}>
       {/*
         overflow-x:clip (NOT hidden) on body — identical visual clipping
         without creating a scroll container that would break position:sticky
         in ScrollStage.
       */}
       <body
-        className={montserrat.className}
+        className={`${lexend.className} font-medium`}
         suppressHydrationWarning
-        style={{ overflowX: 'clip' }}
+        style={{
+          overflowX: 'clip',
+          fontFamily: 'var(--font-lexend), "Lexend", sans-serif',
+          fontWeight: 500,
+        }}
       >
         {/* Lenis smooth-scroll — wraps everything, disabled when prefers-reduced-motion */}
         <LenisProvider>{children}</LenisProvider>

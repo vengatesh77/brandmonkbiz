@@ -3,13 +3,13 @@
 import React, { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Outfit } from 'next/font/google';
+import { Lexend } from 'next/font/google';
 import { Home } from 'lucide-react';
 import Navbar from './Navbar';
 import ContactSection from './ContactSection';
 import { useFounderIntro } from '@/hooks/useFounderIntro';
 
-const bioFont = Outfit({ subsets: ['latin'], weight: ['300', '400', '500', '600'] });
+const bioFont = Lexend({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] });
 
 // ── FOUNDER CONTENT (All data in one editable constant) ──
 export const FOUNDER = {
@@ -240,7 +240,7 @@ export default function FounderProfile() {
                 color: '#0f1424',
                 margin: 0,
                 letterSpacing: '-0.02em',
-                fontFamily: 'var(--font-montserrat), sans-serif',
+                fontFamily: 'var(--font-lexend), "Lexend", sans-serif',
               }}
               className="founder-name-heading inline-block w-fit whitespace-nowrap will-change-transform"
             >
@@ -291,7 +291,7 @@ export default function FounderProfile() {
                   data-fi="bio"
                   style={{
                     fontSize: 'clamp(1.1rem, 1.3vw, 1.45rem)',
-                    fontWeight: 400,
+                    fontWeight: 500,
                     lineHeight: 1.7,
                     color: '#333a48',
                     margin: 0,
@@ -314,7 +314,7 @@ export default function FounderProfile() {
       {/* ── SCOPED CSS FOR 100% BULLETPROOF RESPONSIVE LAYOUT & HOVER STATES ── */}
       <style>{`
         .founder-page-root {
-          font-family: var(--font-montserrat), 'Montserrat', sans-serif;
+          font-family: var(--font-lexend), 'Lexend', sans-serif;
         }
 
         .hover-black:hover {

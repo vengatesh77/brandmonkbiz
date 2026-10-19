@@ -117,7 +117,7 @@ export default function HeroSlides() {
             className="uppercase select-none whitespace-nowrap"
             style={{
               fontSize:      "clamp(1.4rem, 2.8vw, 3.5rem)",
-              fontWeight:    300,
+              fontWeight:    500,
               lineHeight:    1.3,          /* must match pivot calc below */
               letterSpacing: "0.04em",
             }}

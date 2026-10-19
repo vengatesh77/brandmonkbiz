@@ -1,5 +1,5 @@
-﻿.section {
-  --f-inter: var(--font-inter, 'Inter', 'Inter Tight', ui-sans-serif, system-ui, sans-serif);
+.section {
+  --f-inter: var(--font-lexend, 'Lexend', -apple-system, BlinkMacSystemFont, ui-sans-serif, system-ui, sans-serif);
   box-sizing: border-box;
   background-color: #ffffff;
   color: #0f1424;

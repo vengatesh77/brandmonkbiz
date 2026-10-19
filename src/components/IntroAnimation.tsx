@@ -63,18 +63,21 @@ export default function IntroAnimation({
     // they were set outside the context — so the badge stays hidden
     // on the second mount and there is zero flash / double-play.
     // ─────────────────────────────────────────────────────────────
-    const badge   = q('logo-wrap')[0];
-    const logo    = q('logo')[0];
-    const divider = q('divider')[0];
-    const chars   = q('char');
+    const logoWrap   = q('logo-wrap')[0];
+    const brandMonk  = q('brand-monk')[0];
+    const groupWord  = q('group-word')[0];
+    const groupChars = q('group-char');
 
     if (!reduce) {
-      gsap.set(badge,   { autoAlpha: 0, scale: 0.6, transformOrigin: '50% 50%' });
-      gsap.set(logo,    { scale: 0.5, rotation: -10 });
-      gsap.set(divider, { scaleY: 0, transformOrigin: '50% 50%' });
-      gsap.set(chars,   { yPercent: 115 });
+      gsap.set(logoWrap,   { autoAlpha: 0, scale: 0.82, transformOrigin: '50% 50%' });
+      gsap.set(brandMonk,  { autoAlpha: 0, y: 16, scale: 0.96, transformOrigin: '50% 50%' });
+      gsap.set(groupChars, { autoAlpha: 0, y: 12, scale: 0.85, transformOrigin: '50% 50%' });
     } else {
-      gsap.set([badge, logo, divider, ...chars], { autoAlpha: 1, yPercent: 0, scale: 1, scaleY: 1, rotation: 0 });
+      gsap.set([logoWrap, brandMonk, groupWord, ...groupChars], {
+        autoAlpha: 1,
+        y: 0,
+        scale: 1,
+      });
     }
 
     function triggerExit() {
@@ -97,19 +100,46 @@ export default function IntroAnimation({
 
         gsap
           .timeline({ defaults: { force3D: true } })
-          // 1. Badge pops in
-          .to(badge,   { autoAlpha: 1, scale: 1,  duration: 0.7, ease: 'back.out(1.8)' })
-          // 2. Logo spins into position
-          .to(logo,    { scale: 1, rotation: 0,   duration: 0.6, ease: 'back.out(2.4)' }, 0.1)
-          // 3. Tan divider strip wipes up
-          .to(divider, { scaleY: 1,               duration: 0.45, ease: 'power3.out'   }, 0.5)
-          // 4. Chars rise staggered
-          .to(chars,   { yPercent: 0, duration: 0.8, stagger: 0.045, ease: 'expo.out' }, 0.65)
+          // 1. Logo container springs in with subtle scale
+          .to(logoWrap, {
+            autoAlpha: 1,
+            scale: 1,
+            duration: 0.75,
+            ease: 'back.out(1.5)',
+          })
+          // 2. Bold BRAND MONK slides into place with crisp authority
+          .to(brandMonk, {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.65,
+            ease: 'power3.out',
+          }, 0.15)
+          // 3. Staggered reveal of lowercase "group" letters
+          .to(groupChars, {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.45,
+            stagger: 0.05,
+            ease: 'back.out(2)',
+          }, 0.38)
+          // 4. Subtle cinematic float/breath
+          .to(logoWrap, {
+            scale: 1.03,
+            duration: 0.8,
+            ease: 'sine.inOut',
+          }, 0.75)
           // 5. Hold
           .addLabel('hold', '+=0.6')
-          // 6. Badge exits
-          .to(badge, { autoAlpha: 0, scale: 0.88, duration: 0.38, ease: 'power3.in' }, 'hold')
-          .call(triggerExit, [], 'hold+=0.38');
+          // 6. Smooth cinematic exit
+          .to(logoWrap, {
+            autoAlpha: 0,
+            scale: 0.92,
+            duration: 0.4,
+            ease: 'power3.in',
+          }, 'hold')
+          .call(triggerExit, [], 'hold+=0.4');
       });
     }, root);
 

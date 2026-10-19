@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-montserrat)', 'sans-serif'],
+        sans: ['var(--font-lexend)', 'Lexend', 'sans-serif'],
       },
       colors: {
         brand: {

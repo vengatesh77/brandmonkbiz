@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight } from 'lucide-react';
+import BrandMonkGroupLogo from './BrandMonkGroupLogo';
 
 interface NavbarProps {
   onReplayIntro?: () => void;
@@ -61,24 +62,32 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
               z-index: 60;
               display: flex;
               align-items: center;
-              justify-content: center;
+              justify-content: flex-start;
               background: transparent;
-              width: clamp(110px, 9vw, 172px);
-              height: clamp(90px, 7vw, 130px);
-              text-decoration: none;
-              transition: opacity 0.2s ease;
-            }
-            .bm-logo-card:hover { opacity: 0.85; }
-            .bm-logo-card img {
-              display: block;
-              height: 90%;
               width: auto;
-              object-fit: contain;
-              filter: drop-shadow(0 2px 8px rgba(0,0,0,0.45));
+              height: clamp(85px, 5.9vw, 115px);
+              text-decoration: none;
+              transition: opacity 0.2s ease, transform 0.2s ease;
+            }
+            .bm-logo-card:hover {
+              opacity: 0.9;
+              transform: translateY(-1px);
+            }
+            .bm-logo-card .bm-logo-svg {
+              display: block;
+              height: clamp(44px, 3.5vw, 64px);
+              width: auto;
+              filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.55));
+              overflow: visible;
             }
             @media (max-width: 767px) {
-              .bm-logo-card { width: 90px; height: 80px; left: 16px; }
-              .bm-logo-card img { height: 88%; }
+              .bm-logo-card {
+                height: clamp(65px, 12vw, 80px);
+                left: 16px;
+              }
+              .bm-logo-card .bm-logo-svg {
+                height: clamp(34px, 7.5vw, 44px);
+              }
             }
           `}</style>
 
@@ -90,14 +99,8 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
               style={{ height: '100%' }}
               aria-label="Brand Monk Group Home"
             >
-              <div style={{ position: 'relative', width: '160px', height: '64px' }}>
-                <Image
-                  src="/images/1617787737947.png"
-                  alt="Brand Monk Group"
-                  fill
-                  style={{ objectFit: 'contain', objectPosition: 'left center' }}
-                  priority
-                />
+              <div style={{ position: 'relative', width: '135px', height: '48px', display: 'flex', alignItems: 'center' }}>
+                <BrandMonkGroupLogo color="#2b2b2a" style={{ width: '100%', height: 'auto' }} />
               </div>
             </Link>
           ) : (
@@ -107,10 +110,9 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
               className="bm-logo-card pointer-events-auto"
               aria-label="Brand Monk Group Home"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/1617787737947.png"
-                alt="Brand Monk Group"
+              <BrandMonkGroupLogo
+                color="#ffffff"
+                className="bm-logo-svg"
               />
             </Link>
           )}
@@ -139,7 +141,7 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
                     style={{
                       color: isSolidWhite ? '#111111' : '#ffffff',
                       opacity: isSolidWhite ? (isActive ? 1 : 0.85) : 1,
-                      fontWeight: isActive ? 600 : 400,
+                      fontWeight: isActive ? 600 : 500,
                       fontSize: 'clamp(13px, 1.05vw, 18px)',
                       letterSpacing: '0.02em',
                     }}
@@ -166,7 +168,7 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
 
           {/* Mobile Hamburger Button */}
           <div
-            className="pointer-events-auto lg:hidden flex items-center"
+            className="pointer-events-auto lg:hidden flex items-center ml-auto"
             style={{
               marginTop: isSolidWhite ? '0' : 'clamp(20px, 3.2vw, 40px)',
             }}
@@ -202,7 +204,7 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: '100%' }}
               transition={{ duration: 0.35, ease: [0.76, 0, 0.24, 1] }}
-              className="pointer-events-auto fixed inset-0 z-50 bg-[#07080c]/98 backdrop-blur-2xl flex flex-col justify-between p-8 sm:p-12 lg:hidden"
+              className="pointer-events-auto fixed inset-0 z-[70] bg-[#07080c]/98 backdrop-blur-2xl flex flex-col justify-between p-8 sm:p-12 lg:hidden"
             >
               <div className="flex justify-between items-center border-b border-white/20 pb-6">
                 <span className="text-white font-bold text-sm tracking-widest uppercase">

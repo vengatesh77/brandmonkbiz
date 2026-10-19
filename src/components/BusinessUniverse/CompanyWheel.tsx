@@ -3,7 +3,7 @@
 import React, { useMemo, useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Company } from '@/data/companies';
-import Image from 'next/image';
+import BrandMonkGroupLogo from '@/components/BrandMonkGroupLogo';
 
 const MAROON = '#9e1b23';
 const MAROON_RGBA = (a: number) => `rgba(158,27,35,${a})`;
@@ -448,29 +448,24 @@ export default function CompanyWheel({
           }}
           className="wheel-centre-hub"
         >
-          {/* Brand Monk Official Seal */}
+          {/* Brand Monk Master Logo */}
           <div
             style={{
               position: 'relative',
-              width: 184,
-              height: 184,
+              width: 156,
+              height: 98,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
             }}
             className="animate-logo-breathe"
           >
-            <Image
-              src="/images/image copy 8.png"
-              alt="Brand Monk Group"
-              width={184}
-              height={184}
-              priority
+            <BrandMonkGroupLogo
+              color="#2b2b2a"
               style={{
                 width: '100%',
-                height: '100%',
-                objectFit: 'contain',
-                filter: 'drop-shadow(0 4px 14px rgba(158, 27, 35, 0.15))',
+                height: 'auto',
+                filter: 'drop-shadow(0 2px 10px rgba(0, 0, 0, 0.08))',
               }}
             />
           </div>
