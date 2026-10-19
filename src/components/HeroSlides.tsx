@@ -5,14 +5,14 @@ import { motion, useReducedMotion } from "framer-motion";
 
 /* ── Unchanged constants ───────────────────────────────────────────── */
 const SLIDES = [
-  { word: "CONSULTING",              image: "/hero/consulting-bg.jpg" },
+  { word: "CONSULTING", image: "/hero/consulting-bg.jpg" },
   { word: "ARTIFICIAL INTELLIGENCE", image: "/hero/ai-bg.jpg" },
-  { word: "FOOD & BEVERAGES",        image: "/images/image copy 5.png" },
-  { word: "EDUCATION",               image: "/hero/education-bg.jpg" },
+  { word: "FOOD & BEVERAGES", image: "/images/image copy 5.png" },
+  { word: "ACADEMY", image: "/hero/education-bg.jpg" },
 ];
 const INTERVAL_MS = 4000;
-const FADE        = 1.2;                               // image crossfade (s)
-const EASE        = [0.76, 0, 0.24, 1] as const;      // cube rotation ease
+const FADE = 1.2;                               // image crossfade (s)
+const EASE = [0.76, 0, 0.24, 1] as const;      // cube rotation ease
 
 export default function HeroSlides() {
   const [active, setActive] = useState(0);
@@ -47,21 +47,21 @@ export default function HeroSlides() {
               animate={
                 isActive
                   ? {
-                      opacity: 1,
-                      scale: 1,
-                      transition: {
-                        opacity: { duration: FADE, ease: "easeInOut" },
-                        scale:   { duration: 6,    ease: "easeOut"   },
-                      },
-                    }
+                    opacity: 1,
+                    scale: 1,
+                    transition: {
+                      opacity: { duration: FADE, ease: "easeInOut" },
+                      scale: { duration: 6, ease: "easeOut" },
+                    },
+                  }
                   : {
-                      opacity: 0,
-                      scale: 1.12,
-                      transition: {
-                        opacity: { duration: 0, delay: FADE + 0.1 },
-                        scale:   { duration: 0, delay: FADE + 0.1 },
-                      },
-                    }
+                    opacity: 0,
+                    scale: 1.12,
+                    transition: {
+                      opacity: { duration: 0, delay: FADE + 0.1 },
+                      scale: { duration: 0, delay: FADE + 0.1 },
+                    },
+                  }
               }
             >
               <Image
@@ -116,9 +116,9 @@ export default function HeroSlides() {
           <h1
             className="uppercase select-none whitespace-nowrap"
             style={{
-              fontSize:      "clamp(1.4rem, 2.8vw, 3.5rem)",
-              fontWeight:    500,
-              lineHeight:    1.3,          /* must match pivot calc below */
+              fontSize: "clamp(1.4rem, 2.8vw, 3.5rem)",
+              fontWeight: 500,
+              lineHeight: 1.3,          /* must match pivot calc below */
               letterSpacing: "0.04em",
             }}
           >
@@ -171,7 +171,7 @@ export default function HeroSlides() {
           >
             {SLIDES.map((s, i) => {
               const isActive = i === active;
-              const isPrev   = i === prev;
+              const isPrev = i === prev;
 
               /* ── Reduced-motion: simple opacity crossfade ── */
               if (reduced) {
@@ -180,8 +180,8 @@ export default function HeroSlides() {
                     key={s.word}
                     className="block whitespace-nowrap"
                     style={{
-                      gridArea:  "1 / 1",
-                      fontSize:  "clamp(1.5rem, 3vw, 3.75rem)",
+                      gridArea: "1 / 1",
+                      fontSize: "clamp(1.5rem, 3vw, 3.75rem)",
                       lineHeight: 1.3,
                     }}
                     aria-hidden={!isActive}
@@ -200,20 +200,20 @@ export default function HeroSlides() {
                   key={s.word}
                   className="block whitespace-nowrap"
                   style={{
-                    gridArea:          "1 / 1",
-                    fontSize:          "clamp(1.5rem, 3vw, 3.75rem)",
-                    lineHeight:        1.3,
-                    letterSpacing:     "0.02em",
+                    gridArea: "1 / 1",
+                    fontSize: "clamp(1.5rem, 3vw, 3.75rem)",
+                    lineHeight: 1.3,
+                    letterSpacing: "0.02em",
                     /*
                       Pivot = half of line-height behind the text surface.
                       line-height 1.3em → half = 0.65em → use -0.65em as Z.
                       This makes the top/bottom edges of the line share the
                       same rotation axis, like faces of a physical box.
                     */
-                    transformOrigin:   "50% 50% -0.65em",
-                    backfaceVisibility:"hidden",
-                    willChange:        "transform, opacity",
-                    overflow:          "visible",   /* never clip horizontally */
+                    transformOrigin: "50% 50% -0.65em",
+                    backfaceVisibility: "hidden",
+                    willChange: "transform, opacity",
+                    overflow: "visible",   /* never clip horizontally */
                   }}
                   aria-hidden={!isActive}
                   initial={{
@@ -223,17 +223,17 @@ export default function HeroSlides() {
                   animate={
                     isActive
                       ? {
-                          rotateX: 0,
-                          opacity: 1,
-                          transition: { duration: 0.9, ease: EASE },
-                        }
+                        rotateX: 0,
+                        opacity: 1,
+                        transition: { duration: 0.9, ease: EASE },
+                      }
                       : isPrev
-                      ? {
+                        ? {
                           rotateX: 90,
                           opacity: 0,
                           transition: { duration: 0.9, ease: EASE },
                         }
-                      : {
+                        : {
                           /* All other slides: snap to waiting position instantly */
                           rotateX: -90,
                           opacity: 0,
