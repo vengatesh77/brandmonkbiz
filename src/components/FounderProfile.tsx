@@ -242,7 +242,7 @@ export default function FounderProfile() {
                 letterSpacing: '-0.02em',
                 fontFamily: 'var(--font-lexend), "Lexend", sans-serif',
               }}
-              className="founder-name-heading inline-block w-fit whitespace-nowrap will-change-transform"
+              className="founder-name-heading inline-block w-fit whitespace-normal lg:whitespace-nowrap will-change-transform"
             >
               {FOUNDER.name.split(" ").map((w, wi, arr) => (
                 <span key={wi} aria-hidden className="inline-block whitespace-nowrap">
@@ -381,14 +381,48 @@ export default function FounderProfile() {
 
         /* ── Responsive Mobile & Tablet Layout ── */
         @media (max-width: 1023px) {
+          .founder-page-root {
+            overflow-x: hidden;
+          }
+
+          .founder-main-container {
+            overflow-x: hidden !important;
+          }
+
           .founder-two-col-grid {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: minmax(0, 1fr) !important;
             row-gap: 36px !important;
+            width: 100% !important;
           }
 
           .founder-left-col {
             margin-top: 0 !important;
-            max-width: 420px;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+          }
+
+          .founder-photo-box {
+            width: 100% !important;
+            max-width: 100% !important;
+          }
+
+          .founder-photo-box img {
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important;
+            display: block !important;
+          }
+
+          .founder-right-col {
+            width: 100% !important;
+            min-width: 0 !important;
+          }
+
+          .founder-name-heading {
+            white-space: normal !important;
+            font-size: clamp(1.6rem, 7.5vw, 2.5rem) !important;
+            line-height: 1.15 !important;
           }
 
           .founder-breadcrumb {

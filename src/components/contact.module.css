@@ -266,6 +266,7 @@
 @media (max-width: 1023px) {
   .grid { grid-template-columns: 1fr; }
   .infoSide { padding-left: 0; }
+  .mainTitle { font-size: clamp(1.8rem, 7vw, 3.2rem); }
 }
 
 @media (max-width: 640px) {

@@ -9,6 +9,7 @@ const VIDEO_SRCS = [
   '/videos/WhatsApp Video 2026-10-07 at 1.20.50 PM.mp4',
   '/videos/WhatsApp Video 2026-10-06 at 12.55.04 PM (1).mp4',
   '/videos/WhatsApp Video 2026-10-06 at 12.55.02 PM.mp4',
+  '/videos/World-class content, made right here.At Monk Podcast Studio in RS Puram, Coimbatore, we support .mp4',
 ];
 
 export default function SocialBitesSection() {
@@ -99,7 +100,7 @@ export default function SocialBitesSection() {
           </button>
         </div>
 
-        {/* ── 5 Videos in one row ── */}
+        {/* ── 6 Videos in one row ── */}
         <div className="reels-grid">
           {VIDEO_SRCS.map((src, i) => (
             <div
@@ -152,7 +153,7 @@ export default function SocialBitesSection() {
       <style>{`
         .reels-grid {
           display: grid;
-          grid-template-columns: repeat(5, 1fr);
+          grid-template-columns: repeat(6, 1fr);
           gap: 16px;
           width: 100%;
         }
@@ -183,7 +184,7 @@ export default function SocialBitesSection() {
           color: #9e1b23 !important;
         }
 
-        @media (max-width: 1100px) {
+        @media (max-width: 1200px) {
           .reels-grid {
             grid-template-columns: repeat(3, 1fr);
           }
