@@ -223,41 +223,35 @@ function getLabelAttrs(nodeX: number, nodeY: number, side: LabelSide, nLines: nu
   const PAD = M_NODE_CIRCLE_R + 9;
   const LINE_H = 12.5;
 
-  if (side === 'above') {
-    const startY = nodeY - PAD - 4 - (nLines - 1) * LINE_H;
-    return {
-      x: nodeX,
-      startY,
-      lineH: LINE_H,
-      anchor: 'middle' as const,
-    };
+  let x = nodeX;
+  let startY = nodeY;
+  let anchor: 'middle' | 'start' | 'end' = 'middle';
+
+  switch (side) {
+    case 'above':
+      x = nodeX;
+      startY = nodeY - PAD - 4 - (nLines - 1) * LINE_H;
+      anchor = 'middle';
+      break;
+    case 'below':
+      x = nodeX;
+      startY = nodeY + PAD + 14;
+      anchor = 'middle';
+      break;
+    case 'right':
+      x = nodeX + PAD;
+      startY = nLines > 1 ? nodeY - (LINE_H * (nLines - 1)) / 2 : nodeY + 4;
+      anchor = 'start';
+      break;
+    case 'left':
+    default:
+      x = nodeX - PAD;
+      startY = nLines > 1 ? nodeY - (LINE_H * (nLines - 1)) / 2 : nodeY + 4;
+      anchor = 'end';
+      break;
   }
-  if (side === 'below') {
-    const startY = nodeY + PAD + 6;
-    return {
-      x: nodeX,
-      startY,
-      lineH: LINE_H,
-      anchor: 'middle' as const,
-    };
-  }
-  if (side === 'right') {
-    const startY = nLines > 1 ? nodeY - (LINE_H * (nLines - 1)) / 2 : nodeY + 4;
-    return {
-      x: nodeX + PAD,
-      startY,
-      lineH: LINE_H,
-      anchor: 'start' as const,
-    };
-  }
-  // left
-  const startY = nLines > 1 ? nodeY - (LINE_H * (nLines - 1)) / 2 : nodeY + 4;
-  return {
-    x: nodeX - PAD,
-    startY,
-    lineH: LINE_H,
-    anchor: 'end' as const,
-  };
+
+  return { x, startY, lineH: LINE_H, anchor };
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
