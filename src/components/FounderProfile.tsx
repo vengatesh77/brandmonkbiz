@@ -429,6 +429,11 @@ export default function FounderProfile() {
             padding-top: 30px !important;
             font-size: 14px !important;
           }
+
+          .founder-bio-paragraph {
+            text-align: justify !important;
+            text-justify: inter-word;
+          }
         }
       `}</style>
     </div>

@@ -14,17 +14,34 @@ const INTERVAL_MS = 4000;
 const FADE = 1.2;                               // image crossfade (s)
 const EASE = [0.76, 0, 0.24, 1] as const;      // cube rotation ease
 
-export default function HeroSlides() {
+interface HeroSlidesProps {
+  introFinished?: boolean;
+}
+
+export default function HeroSlides({ introFinished = true }: HeroSlidesProps) {
   const [active, setActive] = useState(0);
   const reduced = useReducedMotion();                   // a11y
 
   useEffect(() => {
-    const id = setInterval(
-      () => setActive((i) => (i + 1) % SLIDES.length),
-      INTERVAL_MS
-    );
-    return () => clearInterval(id);
-  }, []);
+    if (!introFinished) {
+      setActive(0);
+      return;
+    }
+
+    let intervalId: NodeJS.Timeout | undefined;
+    // When hero first opens, show CONSULTING for 1.5s before transitioning to ARTIFICIAL INTELLIGENCE
+    const firstTimer = setTimeout(() => {
+      setActive(1);
+      intervalId = setInterval(() => {
+        setActive((i) => (i + 1) % SLIDES.length);
+      }, INTERVAL_MS);
+    }, 1500);
+
+    return () => {
+      clearTimeout(firstTimer);
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [introFinished]);
 
   const prev = (active - 1 + SLIDES.length) % SLIDES.length;
 
@@ -104,7 +121,7 @@ export default function HeroSlides() {
           and overflow-hidden / filter collapses perspective.
       ═══════════════════════════════════════════════════ */}
       <div
-        className="absolute top-1/2 z-20 -translate-y-1/2"
+        className="hero-content-wrapper absolute top-1/2 z-20 -translate-y-1/2"
         style={{ left: "clamp(24px, 8vw, 160px)" }}
       >
         <div
@@ -114,7 +131,7 @@ export default function HeroSlides() {
         >
           {/* ── Static "BRAND MONK GROUP" ── */}
           <h1
-            className="uppercase select-none whitespace-nowrap"
+            className="hero-brand-name uppercase select-none whitespace-nowrap"
             style={{
               fontSize: "clamp(1.4rem, 2.8vw, 3.5rem)",
               fontWeight: 500,
@@ -178,7 +195,7 @@ export default function HeroSlides() {
                 return (
                   <motion.span
                     key={s.word}
-                    className="block whitespace-nowrap"
+                    className="hero-rotating-word block whitespace-nowrap"
                     style={{
                       gridArea: "1 / 1",
                       fontSize: "clamp(1.5rem, 3vw, 3.75rem)",
@@ -198,7 +215,7 @@ export default function HeroSlides() {
               return (
                 <motion.span
                   key={s.word}
-                  className="block whitespace-nowrap"
+                  className="hero-rotating-word block whitespace-nowrap"
                   style={{
                     gridArea: "1 / 1",
                     fontSize: "clamp(1.5rem, 3vw, 3.75rem)",
@@ -248,6 +265,22 @@ export default function HeroSlides() {
           </span>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 767px) {
+          .hero-content-wrapper {
+            left: 16px !important;
+            right: 16px !important;
+            max-width: calc(100vw - 32px) !important;
+          }
+          .hero-brand-name {
+            font-size: clamp(1.1rem, 5.2vw, 1.4rem) !important;
+          }
+          .hero-rotating-word {
+            font-size: clamp(0.98rem, 4.65vw, 1.45rem) !important;
+          }
+        }
+      `}</style>
     </>
   );
 }

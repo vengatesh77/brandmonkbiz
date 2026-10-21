@@ -23,7 +23,7 @@ const R_OUTER_ARCS = 282;
 /* ─── MOBILE SVG CONSTANTS ─── */
 // ViewBox sized so nodes nearly fill screen width with labels fitting in
 const M_W = 500;
-const M_H = 530;
+const M_H = 550;
 const M_CX = 250;
 const M_CY = 258;
 const M_HUB_R = 84;          // large centre white circle
@@ -224,7 +224,7 @@ function getLabelAttrs(nodeX: number, nodeY: number, side: LabelSide, nLines: nu
   const LINE_H = 12.5;
 
   if (side === 'above') {
-    const startY = nodeY - PAD - 2 - (nLines - 1) * LINE_H;
+    const startY = nodeY - PAD - 4 - (nLines - 1) * LINE_H;
     return {
       x: nodeX,
       startY,
@@ -233,7 +233,7 @@ function getLabelAttrs(nodeX: number, nodeY: number, side: LabelSide, nLines: nu
     };
   }
   if (side === 'below') {
-    const startY = nodeY + PAD + 4;
+    const startY = nodeY + PAD + 6;
     return {
       x: nodeX,
       startY,

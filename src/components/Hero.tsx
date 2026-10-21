@@ -5,6 +5,7 @@ import HeroSlides from "./HeroSlides";
 
 interface HeroProps {
   onReplayIntro?: () => void;
+  introFinished?: boolean;
 }
 
 /**
@@ -20,7 +21,7 @@ interface HeroProps {
  *
  * DO NOT add a second timer or a second image list here.
  */
-export default function Hero({ onReplayIntro }: HeroProps) {
+export default function Hero({ onReplayIntro, introFinished = true }: HeroProps) {
   return (
     <section
       className="relative w-full overflow-hidden bg-black select-none"
@@ -30,7 +31,7 @@ export default function Hero({ onReplayIntro }: HeroProps) {
       <Navbar onReplayIntro={onReplayIntro} />
 
       {/* All images, overlays, and heading live here */}
-      <HeroSlides />
+      <HeroSlides introFinished={introFinished} />
     </section>
   );
 }

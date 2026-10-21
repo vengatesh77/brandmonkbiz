@@ -62,7 +62,7 @@ export default function HomePage() {
               transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
               style={{ width: '100%', height: '100svh' }}
             >
-              <Hero onReplayIntro={handleReplayIntro} />
+              <Hero onReplayIntro={handleReplayIntro} introFinished={introFinished} />
             </motion.div>
           }
         >
