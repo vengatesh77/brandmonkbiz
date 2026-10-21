@@ -59,53 +59,66 @@ export default function CompanyInfoPanel({ company }: CompanyInfoPanelProps) {
   const websiteHref = company.websiteHref || company.websiteUrl || '#contact';
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.article
-        key={company.name}
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className={styles.panel}
-      >
-        <span className={styles.bar} />
+    <article className={styles.panel}>
+      <span className={styles.bar} />
 
-        <div className={styles.image}>
-          <Image
-            src={company.image}
-            alt={company.name}
-            fill
-            sizes="(min-width:1024px) 40vw, 100vw"
-            className="object-cover object-center"
-            priority
-            quality={100}
-          />
-        </div>
-
-        <div className={styles.meta}>
-          <span className={styles.category}>{company.category}</span>
-          <span className={styles.location}>
-            <PinIcon className="h-4 w-4 text-[#a31621]" />
-            {company.location}
-          </span>
-        </div>
-
-        <h3 className={styles.name}>{company.name}</h3>
-
-        <p className={styles.desc}>{company.description}</p>
-
-        <div className={styles.actions}>
-          <a
-            href={websiteHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.primary}
+      <div className={styles.image}>
+        <AnimatePresence mode="sync" initial={false}>
+          <motion.div
+            key={company.id || company.name}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35, ease: 'easeInOut' }}
+            className="absolute inset-0 w-full h-full"
           >
-            Official Website
-            <ArrowUpRightIcon className="h-4 w-4 ml-1" />
-          </a>
-        </div>
-      </motion.article>
-    </AnimatePresence>
+            <Image
+              src={company.image}
+              alt={company.name}
+              fill
+              sizes="(min-width:1024px) 40vw, 100vw"
+              className="object-cover object-center"
+              priority
+              quality={100}
+            />
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={company.id || company.name}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          className="w-full flex flex-col"
+        >
+          <div className={styles.meta}>
+            <span className={styles.category}>{company.category}</span>
+            <span className={styles.location}>
+              <PinIcon className="h-4 w-4 text-[#a31621]" />
+              {company.location}
+            </span>
+          </div>
+
+          <h3 className={styles.name}>{company.name}</h3>
+
+          <p className={styles.desc}>{company.description}</p>
+
+          <div className={styles.actions}>
+            <a
+              href={websiteHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.primary}
+            >
+              Official Website
+              <ArrowUpRightIcon className="h-4 w-4 ml-1" />
+            </a>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </article>
   );
 }

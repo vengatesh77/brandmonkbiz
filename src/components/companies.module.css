@@ -29,6 +29,19 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.headingGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.accentBar {
+  display: none;
+}
+
+.titleBreak {
+  display: none;
+}
+
 .title {
   margin: 0;
   font-size: clamp(1.6rem, 2.6vw, 3rem);
@@ -217,5 +230,81 @@
   .panel {
     max-width: none;
     justify-self: stretch;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: 28px 20px 24px;
+    background: #fafbfc;
+    height: auto;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
+  }
+
+  /* Controls are hidden on mobile — navigation is via swipe / dots */
+  .controls {
+    display: none !important;
+  }
+
+  .headingGroup {
+    width: 100%;
+  }
+
+  .accentBar {
+    display: block;
+    width: 44px;
+    height: 3px;
+    border-radius: 2px;
+    background: #9e1b23;
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: clamp(1.75rem, 8vw, 2.4rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: #0f1424;
+    margin: 0;
+  }
+
+  .titleBreak {
+    display: inline;
+  }
+
+  /* Body is replaced by the React swipe container — hide the default grid */
+  .body {
+    display: none;
+  }
+
+  .wheelBox {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Panel is shown inside the React swipe container on page 1 */
+  .panel {
+    max-width: none;
+    justify-self: stretch;
+    width: 100%;
+    padding: 0 4px;
   }
 }

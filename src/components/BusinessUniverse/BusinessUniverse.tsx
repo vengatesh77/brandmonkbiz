@@ -7,16 +7,31 @@ import CompanyInfoPanel from '@/components/CompanyInfoPanel';
 import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 import styles from '../companies.module.css';
 
+const MAROON = '#9e1b23';
+
 export default function BusinessUniverse() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [rotationAngle, setRotationAngle] = useState<number>(0);
   const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState(false);
+  // Touch swipe state
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
 
   // Active index ref for timer callbacks
   const activeIndexRef = useRef<number>(0);
   activeIndexRef.current = activeIndex;
 
   const total = COMPANIES.length;
+
+  // Detect mobile breakpoint
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
 
   // Rotate to specific index using shortest rotational path
   const handleSelectCompany = useCallback(
@@ -45,18 +60,16 @@ export default function BusinessUniverse() {
     handleSelectCompany(prevIdx);
   }, [total, handleSelectCompany]);
 
-  // AUTOMATIC COMPANY CHANGE — 2 SECONDS (2000ms)
+  // AUTOMATIC COMPANY CHANGE — 2 SECONDS
   useEffect(() => {
     if (isPaused) return;
-
     const interval = setInterval(() => {
       handleNext();
     }, 2000);
-
     return () => clearInterval(interval);
   }, [isPaused, handleNext]);
 
-  // Preload all company images into browser memory to eliminate image load flashes
+  // Preload all company images
   useEffect(() => {
     COMPANIES.forEach((company) => {
       if (typeof window !== 'undefined' && company.image) {
@@ -66,28 +79,91 @@ export default function BusinessUniverse() {
     });
   }, []);
 
-  // Keyboard navigation listener
+  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight') {
-        handleNext();
-      } else if (e.key === 'ArrowLeft') {
-        handlePrev();
-      }
+      if (e.key === 'ArrowRight') handleNext();
+      else if (e.key === 'ArrowLeft') handlePrev();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleNext, handlePrev]);
 
+  // Touch swipe handlers for mobile wheel rotation
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    const dy = e.changedTouches[0].clientY - touchStartY.current;
+    // Only trigger horizontal swipe if it's more horizontal than vertical
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      if (dx < 0) handleNext();
+      else handlePrev();
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
+
   const activeCompany = COMPANIES[activeIndex];
 
+  // ── MOBILE LAYOUT (Wheel animation only) ──────────────────────────────────
+  if (isMobile) {
+    return (
+      <section id="companies" className={styles.section}>
+        <div className={styles.inner}>
+          {/* Header */}
+          <header className={styles.header}>
+            <div className={styles.headingGroup}>
+              <span className={styles.accentBar} />
+              <h2 className={styles.title}>
+                Our <span className={styles.titleBreak}><br /></span>Companies <span className={styles.titleBreak}><br /></span>&amp; Verticals
+              </h2>
+            </div>
+          </header>
+
+          {/* Wheel animation only */}
+          <div
+            style={{
+              flex: 1,
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingTop: '12px',
+              paddingBottom: '16px',
+              minHeight: 0,
+            }}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            <CompanyWheel
+              companies={COMPANIES}
+              activeIndex={activeIndex}
+              rotationAngle={rotationAngle}
+              onSelectCompany={handleSelectCompany}
+            />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // ── DESKTOP LAYOUT (unchanged) ─────────────────────────────────────────────
   return (
     <section id="companies" className={styles.section}>
       <div className={styles.inner}>
         <header className={styles.header}>
-          <h2 className={styles.title}>
-            Our Companies &amp; Verticals
-          </h2>
+          <div className={styles.headingGroup}>
+            <span className={styles.accentBar} />
+            <h2 className={styles.title}>
+              Our <span className={styles.titleBreak}><br /></span>Companies <span className={styles.titleBreak}><br /></span>&amp; Verticals
+            </h2>
+          </div>
           <div className={styles.controls}>
             {/* pause / play button */}
             <button

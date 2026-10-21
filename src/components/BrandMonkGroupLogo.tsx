@@ -6,6 +6,8 @@ interface BrandMonkGroupLogoProps {
   color?: string;
   width?: number | string;
   height?: number | string;
+  x?: number | string;
+  y?: number | string;
 }
 
 /**
@@ -19,11 +21,15 @@ export default function BrandMonkGroupLogo({
   color = '#ffffff',
   width,
   height,
+  x,
+  y,
 }: BrandMonkGroupLogoProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 214 132"
+      x={x}
+      y={y}
       width={width}
       height={height}
       className={className}
