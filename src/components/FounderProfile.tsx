@@ -296,6 +296,7 @@ export default function FounderProfile() {
                     color: '#333a48',
                     margin: 0,
                     letterSpacing: '0.01em',
+                    textAlign: 'justify',
                   }}
                   className="founder-bio-paragraph"
                 >
@@ -345,6 +346,11 @@ export default function FounderProfile() {
           display: flex;
           flex-direction: column;
           width: 100%;
+        }
+
+        .founder-bio-paragraph {
+          text-align: justify;
+          text-justify: inter-word;
         }
 
         /* ── Social Media Button Styles with Real Branding ── */
