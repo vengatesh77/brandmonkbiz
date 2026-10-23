@@ -9,7 +9,7 @@ const VIDEO_SRCS = [
   '/videos/WhatsApp Video 2026-10-07 at 1.20.50 PM.mp4',
   '/videos/WhatsApp Video 2026-10-06 at 12.55.04 PM (1).mp4',
   '/videos/WhatsApp Video 2026-10-06 at 12.55.02 PM.mp4',
-  '/videos/World-class content, made right here.At Monk Podcast Studio in RS Puram, Coimbatore, we support .mp4',
+  '/videos/social-bite-6.mp4',
 ];
 
 export default function SocialBitesSection() {
